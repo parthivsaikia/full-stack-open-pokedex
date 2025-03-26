@@ -11,26 +11,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: success
-        uses: Ilshidur/disco rd-webhook-notify@v1
-        if: success()
-        continue-on-error: true
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() }}
         with:
           severity: info
-          details: Push to main branch succeeded!
-          webhookURL: ${{ secrets.DISCORD_WEBOHOOK }}
+          details: Test Succeeded!
+          webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: failure
-        uses: Ilshidur/disco rd-webhook-notify@v1
-        if: failure()
-        continue-on-error: true
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
         with:
           severity: error
-          details: Push to main branch failed!
-          webhookURL: ${{ secrets.DISCORD_WEBOHOOK }}
+          details: Test Failed!
+          webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: cancelled
-        uses: Ilshidur/disco rd-webhook-notify@v1
-        if: cancelled()
-        continue-on-error: true
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{cancelled()}}
         with:
           severity: warn
-          details: Push to main branch was cancelled!
-          webhookURL: ${{ secrets.DISCORD_WEBOHOOK }}
+          details: Test Cancelled!
+          webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
